@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1" />
+
+<title>Hilo</title>
+
+<link href="./bootstrap3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+.wa {
+	width: 100%;
+}
+</style>
+<link href="./css/home.css" rel="stylesheet" />
+</head>
+
+<body>
+<!-- <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Hilo</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><a href="../index.html">首页</a></li>
+          <li><a href="http://gitlab.alibaba-inc.com/ali-f2e-game/hilo" target="_blank">源码下载</a></li>
+          <li class="active"><a href="index.html">API文档</a></li>
+          <li><a href="tutorial.html">使用指南</a></li>
+          <li><a href="demo.html">作品演示</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+<header id="header">
+      <div>
+  <a href="https://github.com/hiloteam/Hilo" class="download">
+  	<span class="glyphicon glyphicon-download"></span> <br/>下载
+  </a>
+   <a href="tutorial/index.html" class="about">
+    <span class="glyphicon glyphicon-fire"></span> <br/>快速开始
+  </a>
+  <a href="#" class="home">
+  </a>
+   <a href="api/index.html" class="api">
+    <span class="glyphicon glyphicon-book"></span> <br/>Api文档
+  </a>
+  <a class="demo" href="examples/index.html">
+    <span class="glyphicon glyphicon-send"></span> <br/>示例
+  </a>
+  </div>
+</header>
+
+<div class="content why-hilo">
+	<h2>为什么要使用Hilo</h2>
+
+	<p class="info">
+		Hilo是一个跨终端的互动小游戏解决方案。他有以下几个特点值得被推荐。
+	</p>
+
+	<div class="circle-wrap">
+		<a class="circle module-f" href="#introWrap">
+			<span class="glyphicon glyphicon-cutlery"></span> <br/>
+			无依赖<br/>
+			模块化<br/>
+			范式包容
+		</a>
+
+		<a class="circle module-f" href="#introWrap">
+			<span class="glyphicon glyphicon-screenshot"></span><br/>
+			最小内核<br/>
+			终端兼容<br/>
+			Shim独立
+		</a>
+
+		<a class="circle module-f" href="#introWrap">
+			<span class="glyphicon glyphicon-leaf"></span> <br/>
+			周边覆盖<br/>
+			自动化构建<br/>
+			工具化产出
+		</a>
+	</div>
+
+	<div class="intro-wrap" id="introWrap">
+		<h3>
+	        <span>Meta</span>
+	      </h3>
+		<div id="feature1" class="feature">
+			<span class="glyphicon glyphicon-cutlery"></span>
+			<p>
+			Hilo作为一个跨终端的互动小游戏解决方案。它的源码和架构是无依赖的，模块化的。同时也是开源的。可以在<a href="https://github.com/hiloteam/Hilo">这里</a>查看并下载到源码。
+			</p>
+			<p>
+				为了满足使用不同脚本模块加载器的同学的喜好。Hilo提供了多种模块范式的包装版本，<a href="tutorial/index.html">请看这里</a>不管你属于哪一个阵营，都能找到你爱的哪一个。
+			</p>
+		</div>
+
+		<div id="feature2" class="feature">
+			<span class="glyphicon glyphicon-screenshot"></span>
+			<p>Hilo对于跨终端的解决方案是：永远保持最小内核，以渐进增强的独立Shim Adaptor的方式去包容不同终端。</p>
+			<ul>
+				<li>如果你的项目只需要适配对canvas和css3支持度良好的高级浏览器或者webview，你可以直接使用Hilo基础渲染器。</li>
+				<li>如果需要适配不支持canvas的终端，只需要简单的引入一个Flash Shim模块即可</li>
+			</ul>
+			详细的信息请看<a href="shim/index.html">这里</a>。
+		</div>
+
+		<div id="feature3" class="feature">
+			<span class="glyphicon glyphicon-leaf"></span>
+			<p>Hilo不仅仅是一个渲染引擎，它更是一个集成了 <a href="hilo-audio/index.html">Hilo Audio</a>, <a href="hilo-preload/index.html">Hilo Preload</a> 等游戏构建服务的综合解决方案。</p>
+			<p>除此之外，Hilo为动画纹理集的产出提供了一套<a href="hilo-tools/index.html">自动化的输出方案</a>，力求为你的构建带来更多的便利。</p>
+
+		</div>
+
+		<h3>
+	        <span><img src="img/axes.svg"></span>
+	      </h3>
+
+	     <p>
+	     	&copy; Hilo 2016
+	     </p>
+
+	</div>
+</div>
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./bootstrap3.0.3/js/bootstrap.min.js"></script>
+</body>
+</html>

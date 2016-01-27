@@ -1,0 +1,23 @@
+site_name: Hilo
+docs_dir: tutorial_src
+site_dir: tutorial
+theme_dir: tutorial_theme
+use_direcory_urls: False
+copyright: © Hilo 2016
+
+# 顶部导航
+topnav:
+- ['首页', '../index.html']
+- ['源码下载', 'https://github.com/hiloteam/Hilo']
+- ['API文档', '../api/index.html']
+- ['教程文档', 'index.html', True]
+- ['作品演示', '../examples/index.html']
+
+# Markdown文档页面
+pages:
+- ['index.md', '快速开始']
+- ['modular.md', '模块化支持']
+- ['stage.md', '从舞台开始']
+- ['views.md', '可视对象']
+- ['preload.md', '预加载资源']
+- ['flappybird.md', '使用Hilo快速开发Flappy Bird']

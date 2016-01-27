@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hilo Shim Adaptor</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/prettify.min.css" rel="stylesheet">
+<link href="../css/api.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<style type="text/css">
+.nav-content{
+  min-height: 200px;
+}
+ul li{
+  line-height: 150%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top msfont">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#"><span style="color:#15c6ff;">Hilo</span><span style="color:#fe6258;">JS</span></a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><a href="../index.html">首页</a></li>
+          <li><a href="http://gitlab.alibaba-inc.com/ali-f2e-game/hilo" target="_blank">源码下载</a></li>
+          <li><a href="../api/index.html">API文档</a></li>
+          <li class="active"><a href="javascript:void(0)">跨终端Shim解决方案</a></li>
+         <!--  <li><a href="../demo/index.html">作品演示</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid main-container">
+  <div class="row-fluid">
+    <!-- left sidebar -->
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <div class="hilo-header msfont">跨终端Shim解决方案</div>
+        <div class="nav-content">
+          <ul class="nav nav-list">
+            <li><a href="javascript:void(0)">现代WebView</a></li>
+            <li><a href="javascript:void(0)">低版本IE浏览器</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="span9">
+      <div class="page-header">
+        <h2>现代WebView</h2>
+      </div>
+        <div>
+          <p>对于`现代WebView`的定义是Chrome，FF，Safari，Opera，IE9+ 以及其他的基于Webkit内核为基础的浏览器或者Webview</p>
+          <p>对于现代的Webview，Hilo基础的渲染内核可以做到完全的适配和兼容。包括mobile端和非mobile端的情况。</p>
+          <p>详细的情况可以参考 <a href="../tutorial/index.html">快速开始</a></p>
+        </div>
+
+
+      <div class="page-header">
+        <h2>低版本IE浏览器</h2>
+      </div>
+        <div>
+          <p>对于`低版本IE浏览器`的定义是IE8以及IE8以下版本的IE浏览器。他们是目前市面上对于`canvas`和`css3`技术几乎没有支持，但是又仍然是中国市场上占比很重的一部分webview。</p>
+          <p>为了适配这一部分webview，Hilo采用的独立的Shim Adaptor 的方案，最小成本的让开发者可以直接兼容适配这一部分webview。</p>
+          <p>你只需要在原有hilo渲染引擎脚本的基础之上，再额外引一个flash shim 的Adaptor脚本，就像下面这样，除此之外，你不用做任何事情。</p>
+          <pre class="prettyprint linenums lang-html">
+&lt;script src="hilo-standalone.js"&gt;&lt;/script&gt;
+&lt;script src="hilo-flashshim.js"&gt;&lt;/script&gt;</pre>
+
+			<p>Shim这一部分的工作目前还在进展中，详细情况可以联系 @岑安 @墨川</p>
+        </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="msfont footer">&copy; Hilo 2016</p>
+  </footer>
+
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/prettify.min.js"></script>
+<script type="text/javascript">
+//make code pretty
+window.prettyPrint && prettyPrint();
+</script>
+
+</body>
+</html>

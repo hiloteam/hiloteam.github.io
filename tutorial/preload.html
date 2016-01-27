@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                
+        <title>预加载资源 - Hilo</title>
+
+        <link href="./../bootstrap3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./../bootstrap3.0.3/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="./../css/prettify.min.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+            </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+                        <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <!-- Main title -->
+            <a class="navbar-brand" href="index.html">
+                <span>Hilo</span><span></span>
+            </a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                            <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                                        <li class=""><a href="../index.html">首页</a></li>
+                                        <li class=""><a href="https://github.com/hiloteam/Hilo">源码下载</a></li>
+                                        <li class=""><a href="../api/index.html">API文档</a></li>
+                                        <li class="active"><a href="index.html">教程文档</a></li>
+                                        <li class=""><a href="../examples/index.html">作品演示</a></li>
+                                    </ul>
+                    </div>
+    </div>
+</div>
+        <div class="main container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+
+                <li >
+            <a href="index.html">快速开始</a>
+                    </li>
+                    <li >
+            <a href="modular.html">模块化支持</a>
+                    </li>
+                    <li >
+            <a href="stage.html">从舞台开始</a>
+                    </li>
+                    <li >
+            <a href="views.html">可视对象</a>
+                    </li>
+                    <li class="active">
+            <a href="preload.html">预加载资源</a>
+                                    <li class="active">
+                                <ul class="nav">
+                                        <li><a href="#_2">创建加载队列</a></li>
+                                        <li><a href="#_3">增加下载资源</a></li>
+                                        <li><a href="#_4">监听下载进度</a></li>
+                                        <li><a href="#_5">获取下载信息</a></li>
+                                        <li><a href="#_6">自定义下载器</a></li>
+                                    </ul>
+                            </li>
+                                </li>
+                    <li >
+            <a href="flappybird.html">使用Hilo快速开发Flappy Bird</a>
+                    </li>
+            </ul>
+</div></div>
+            <div class="col-md-9 content" role="main">
+                
+<h1 id="_1">预加载资源</h1>
+<hr />
+<p>在游戏开发中，会涉及到各种资源的预加载，比如图片素材、声音音效、各种数据等等。Hilo提供了一个简单的资源加载队列工具<code>LoadQueue</code>。</p>
+<h2 id="_2">创建加载队列</h2>
+<pre class="prettyprint well"><code>var queue = new Hilo.LoadQueue();
+queue.maxConnections = 2; //设置同时下载的最大连接数，默认为2
+</code></pre>
+<h2 id="_3">增加下载资源</h2>
+<p>使用 LoadQueue.add(item) 方法可以增加资源对象到下载队列。比如：</p>
+<pre class="prettyprint well"><code>queue.add({id:'bg', src:'images/bg.png'});
+</code></pre>
+<p>其中，每个资源对象item包含以下属性：</p>
+<ul>
+<li><code>id</code> - 资源的唯一标识符。可用于从下载队列获取目标资源。</li>
+<li><code>src</code> - 资源的地址url。</li>
+<li><code>type</code> - 指定资源的类型。默认会根据资源文件的后缀来自动判断类型，不同的资源类型会使用不同的加载器来加载资源。</li>
+<li><code>loader</code> - 指定资源的加载器。默认会根据资源类型来自动选择加载器，若指定loader，则会使用指定的loader来加载资源。</li>
+<li><code>noCache</code> - 指示加载资源时是否增加时间标签以防止缓存。</li>
+<li><code>size</code> - 资源对象的预计大小。可用于预估下载进度。</li>
+</ul>
+<p>此外，LoadQueue.add 方法还支持多个item的数组参数。比如：</p>
+<pre class="prettyprint well"><code>queue.add([
+    {id:'bg', size:100, noCache:true, src:'images/bg.png'},
+    {id:'logo', size:100, noCache:true, src:'images/logo.png'},
+    {id:'data', size:300, noCache:true, type:'jsonp', src:'http://Hilo.com/jsonp.js'}
+]);
+</code></pre>
+
+<h2 id="_4">监听下载进度</h2>
+<p>LoadQueue 有3种事件可供监听。</p>
+<ul>
+<li><code>load</code> - 当某一资源下载完成时派发。</li>
+<li><code>error</code> - 当某一资源下载出错时派发。</li>
+<li><code>complete</code> - 当资源队列完成时派发。注意：有可能某一资源下载失败。</li>
+</ul>
+<pre class="prettyprint well"><code>queue.on('load', function(e){
+    //console.log('load:', e.detail);
+});
+queue.on('error', function(e){
+    //console.log('error:', e.detail);
+});
+queue.on('complete', function(e){
+    //console.log('complete:', queue.getLoaded());
+});
+</code></pre>
+
+<h2 id="_5">获取下载信息</h2>
+<p>LoadQueue 提供了一些方法，获取下载队列的情况：</p>
+<ul>
+<li><code>get(id)</code> - 根据id或src地址获取资源对象item。</li>
+<li><code>getContent(id)</code> - 根据id或src地址获取资源对象item的下载内容。</li>
+<li><code>getLoaded</code> - 获取已下载的资源数。</li>
+<li><code>getTotal</code> - 获取所有资源的总数。</li>
+<li><code>getSize(loaded)</code> - 获取全部或已下载的资源的字节大小。</li>
+</ul>
+<p>比如队列下载完成后获取某个资源的下载内容：</p>
+<pre class="prettyprint well"><code>queue.on('complete', function(e){
+    var bg = queue.getContent('bg');
+    console.log(bg);
+});
+</code></pre>
+
+<h2 id="_6">自定义下载器</h2>
+<p>当前 LoadQueue 仅提供了图片下载器 ImageLoader 和js/jsonp加载器 ScriptLoader。若要加载其他资源，可通过加载资源的loader属性来自定义下载器。其中loader要实现以下3个方法：</p>
+<ul>
+<li><code>load(data)</code> - 下载资源的具体实现。</li>
+<li><code>onLoad(e)</code> - 下载完成的回调方法。</li>
+<li><code>onError(e)</code> - 下载出错的回调方法。</li>
+</ul>
+<p>下面的示例演示了自定义加载css的加载器：</p>
+<pre class="prettyprint well"><code>queue.add({id:'dummy_css', type:'css', src:'http://Hilo.com/dummy.css', loader:{
+    load: function(data){
+        var link = document.createElement('link');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        if(data.id) link.id = data.id;
+        link.addEventListener('load', this.onLoad.bind(this), false);
+        link.addEventListener('error', this.onError.bind(this), false);
+        link.href = data.src;
+        document.getElementsByTagName('head')[0].appendChild(link);
+    },
+    onLoad: function(e){
+        return e.target;
+    },
+    onError: function(e){
+        return e;
+    }
+}});
+</code></pre>
+
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'Hilo'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                        <p>© Hilo 2016</p>
+                    </footer>
+
+        
+        <script src="./../js/jquery.min.js"></script>
+        <script src="./../bootstrap3.0.3/js/bootstrap.min.js"></script>
+        <script src="./../js/prettify.min.js"></script>
+        <script src="./js/base.js"></script>
+            </body>
+</html>

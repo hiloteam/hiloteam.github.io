@@ -1,0 +1,237 @@
+body {
+    padding-top: 70px;
+    background-color: #fff;
+}
+
+body > div.container {
+    min-height: 400px;
+}
+
+body > div.navbar{
+    background: #3a383e;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+    border: none;
+}
+
+.navbar-toggle{
+    padding: 10px;
+    margin-top: 12px;
+    border-color: #999;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+    background-color: #fff;
+}
+
+.navbar .navbar-brand{
+    font-size: 32px;
+    padding: 20px 20px;
+    text-shadow: none;
+}
+
+.navbar .navbar-brand span:first-child{
+    color: #15c6ff;
+}
+
+.navbar .navbar-brand span:last-child{
+    color: #fe6258;
+}
+
+.navbar .navbar-nav > li> a{
+    line-height: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #999;
+    text-shadow: none;
+}
+
+.navbar .navbar-nav > li> a:hover{
+    background-color: #383838;
+    color: #fff;
+}
+
+.navbar .navbar-nav > .active > a, .navbar .navbar-nav > .active > a:hover{
+    background: #fe6258;
+    color: #fff;
+    box-shadow: none;
+}
+
+ul.nav li.main {
+    font-weight: bold;
+}
+
+div.col-md-3 {
+    padding-left: 0;
+}
+
+div.source-links {
+    float: right;
+}
+
+div.col-md-9 img {
+    max-width: 100%;
+    display: block;
+    padding: 4px;
+    line-height: 1.428571429;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 20px auto 30px auto;
+}
+
+.col-md-9.content img{
+    border: none;
+}
+
+h1, h2, h3 {
+    color: #444;
+}
+
+h1{
+    font-size: 28px;
+}
+
+h2{
+    font-size: 20px;
+}
+
+pre {
+    overflow: auto;
+}
+
+pre code {
+    word-wrap: normal;
+    white-space: pre;
+}
+
+div.well, pre.well {
+    -webkit-box-shadow: none;
+    -box-shadow: none;
+    background-image: none;
+}
+
+footer{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modal-dialog {
+    margin-top: 60px;
+}
+
+/*
+ * Side navigation
+ *
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content.
+ */
+
+/* By default it's not affixed in mobile views, so undo that */
+.bs-sidebar.affix {
+    position: static;
+}
+
+.bs-sidebar.well {
+    padding: 0;
+}
+
+/* First level of nav */
+.bs-sidenav {
+    padding-top:    10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* All levels of nav */
+.bs-sidebar .nav > li > a {
+    display: block;
+    padding: 5px 20px;
+    color: #716b7a;
+}
+.bs-sidebar .nav > li > a:hover,
+.bs-sidebar .nav > li > a:focus {
+    text-decoration: none;
+    border-right: 1px solid;
+}
+.bs-sidebar .nav > .active > a,
+.bs-sidebar .nav > .active:hover > a,
+.bs-sidebar .nav > .active:focus > a {
+    color: #15c6ff;
+    font-weight: bold;
+    background-color: transparent;
+    border-right: 1px solid #15c6ff;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-sidebar .nav .nav {
+    /*display: none;*/
+    margin-bottom: 8px;
+}
+.bs-sidebar .nav .nav > li > a {
+    padding-left: 35px;
+}
+
+.bs-sidebar .nav .nav .nav > li > a {
+    padding-left: 50px;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-sidebar.affix,
+    .bs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 90px;
+    }
+    .bs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-sidebar.affix-bottom .bs-sidenav,
+    .bs-sidebar.affix .bs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+@media (max-width: 992px){
+    .main{
+        padding-right: 0;
+    }
+    .content{
+        padding-left: 0;
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-sidebar.affix-bottom,
+    .bs-sidebar.affix {
+        width: 263px;
+    }
+}
+
+/* content */
+blockquote{
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-left: 3px solid #faebcc;
+    padding: 10px 15px;
+}
+
+blockquote p{
+    font-size: 14px;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.typ, .atn, .dec, .var{
+    color: #48484c;
+}

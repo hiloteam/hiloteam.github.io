@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hilo Example</title>
+<link href="../bootstrap3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="../bootstrap3.0.3/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="../css/api.min.css" rel="stylesheet">
+
+<style type="text/css">
+.nav-content{
+  min-height: 200px;
+}
+ul li{
+  line-height: 150%;
+}
+.example-cont .example-item {
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  -webkit-border-radius: 5px;
+  line-height: 1.5;
+  text-align: center;
+}
+.example-cont .example-item img{
+  max-width: 100%;
+}
+.example-cont .example-item h4 {
+  line-height: 40px;
+}
+.example-cont .example-item h4 a{
+  text-decoration: none;
+  font-size: 30px;
+}
+.example-cont .item-info {
+  height: 160px;
+  overflow: hidden;
+  padding-top: 8px;
+}
+.row{
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 3%;
+}
+
+@media (max-width: 992px){
+  .col-md-4{
+    margin-bottom: 15px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .row{
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 15px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <span>Hilo</span><span>JS</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../index.html">首页</a></li>
+        <li><a href="http://gitlab.alibaba-inc.com/hilo/hilo/tree/master" target="_blank">源码下载</a></li>
+        <li><a href="../api/index.html">API文档</a></li>
+        <li><a href="../tutorial/index.html">教程文档</a></li>
+        <li class="active"><a href="javascript:void(0);">作品演示</a></li>
+      </u>
+    </div>
+
+  </div>
+</div>
+
+<div class="container main example-cont">
+
+  <div class="col-md-12 row">
+    <div class="col-md-4">
+      <div class="example-item">
+        <a href="http://g.tbcdn.cn/mtb/app-gamepad-flappy/1.0.1/index.html">
+        <img src="../img/examples/flappy.png" />
+        </a>
+        <div class="item-info">
+          <h4><a href="http://g.tbcdn.cn/mtb/app-gamepad-flappy/1.0.1/index.html">Flappy Bird</a></h4>
+          <p>Flappy Bird 是某段时间iOS上红极一时的一个简单的像素设计小游戏。我们用Hilo做了简单的复刻，帮助你快速了解怎样用Hilo实现一个类似这样的小游戏。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="example-item">
+        <a href="#hilo/demo/raw/master/2048/index.html">
+        <img src="../img/examples/2048.png" />
+        </a>
+        <div class="item-info">
+          <h4><a href="#hilo/demo/raw/master/2048/index.html">2048</a></h4>
+          <p>2048 亦是前一段时间网络上人气非常高的一款数字益智类游戏。它简单而有趣，一旦玩起来就根本停不下来。本游戏是采用Hilo的DOM渲染模式开发的。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="example-item">
+        <a href="#hilo/demo/raw/master/fruit-ninja/index.html">
+        <img src="../img/examples/fruit-ninja.png" />
+        </a>
+        <div class="item-info">
+          <h4><a href="#hilo/demo/raw/master/fruit-ninja/index.html">Fruit Ninja</a></h4>
+          <p>水果忍者是iOS平台最具有影响力的游戏之一。我们用Hilo实现了这款游戏的绝大部分功能。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="col-md-12">
+  <hr>
+  <p>&copy; Hilo 2016</p>
+</footer>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../bootstrap3.0.3/js/bootstrap.min.js"></script>
+
+</body>
+</html>

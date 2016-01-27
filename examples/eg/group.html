@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <meta name="apple-touch-fullscreen" content="yes"/>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+        <meta name="format-detection" content="telephone=no" />
+
+        <title>Hilo-Group</title>
+        <style>
+        canvas {display: block;border:1px solid #333; margin:0 auto;}
+        </style>
+<!--
+        <script type="text/javascript" src="../../js/hilo-standalone.js"></script>
+-->
+        <script type="text/javascript" src="http://gitlab.alibaba-inc.com/hilo/hilo/raw/daily/0.1.1/build/standalone/hilo-standalone.js"></script>
+	</head>
+
+	<body>
+		<canvas id="canvas"></canvas>
+
+		<script type="text/javascript">
+
+		var stage = new Hilo.Stage({
+			canvas: document.getElementById('canvas'),
+			width: 800,
+			height: 600
+		});
+
+		var rectCont = new Hilo.Container({
+			width: 400,
+			height: 400,
+			x: 100,
+			y: 100,
+			onRender: function (dt) {
+				//console.log(dt)
+				this.rotation += 1;
+			}
+		});
+		stage.addChild(rectCont);
+
+		var rect1 = new Hilo.Graphics({
+			x: 0,
+			y:0,
+			width: 40,
+			height: 40
+		});
+		rect1.beginFill('rgba(0,0,0,0.5)').drawRect(0, 0, 40, 40).endFill();
+		rectCont.addChild(rect1);
+
+		var rect2 = new Hilo.Graphics({x:100, y: 80, width:50, height:50});
+		rect2.lineStyle('#4aff00').drawSVGPath('M0 0 L100 120 L-60 80 Z').beginFill('#fa0').endFill();
+		rectCont.addChild(rect2);
+
+		var ticker = new Hilo.Ticker(60);
+		ticker.addTick(stage);
+		ticker.start(true);
+		</script>
+	</body>
+</html>

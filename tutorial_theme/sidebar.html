@@ -1,0 +1,49 @@
+<div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+
+    {% for nav_item in nav %}
+    {% if nav_item.children %}
+        <li class="{% if nav_item.active %} active{% endif %}">
+            <a href="{% if nav_item.url %}{{ nav_item.url }}{% else %}javascript:void(0);{% endif %}">{{ nav_item.title }}</a>
+            <ul class="nav">
+            {% for nav_item in nav_item.children %}
+                <li {% if nav_item.active %}class="active"{% endif %}>
+                    <a href="{% if nav_item.url %}{{ nav_item.url }}{% else %}javascript:void(0);{% endif %}">{{ nav_item.title }}</a>
+                    <!-- {% if page.title == nav_item.title %}
+                    {% for toc_item in toc %}
+                    <li class="{% if toc_item.active %}active{% endif %}">
+                        {% if toc_item.children %}
+                        <ul class="nav">
+                            {% for toc_item in toc_item.children %}
+                            <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    {% endif %} -->
+                </li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% else %}
+        <li {% if nav_item.active %}class="active"{% endif %}>
+            <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+            {% if page.title == nav_item.title %}
+            {% for toc_item in toc %}
+            <li class="{% if toc_item.active %}active{% endif %}">
+                {% if toc_item.children %}
+                <ul class="nav">
+                    {% for toc_item in toc_item.children %}
+                    <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+            {% endif %}
+        </li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+</div>

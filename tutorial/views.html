@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                
+        <title>可视对象 - Hilo</title>
+
+        <link href="./../bootstrap3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./../bootstrap3.0.3/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="./../css/prettify.min.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+            </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+                        <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <!-- Main title -->
+            <a class="navbar-brand" href="index.html">
+                <span>Hilo</span><span></span>
+            </a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                            <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                                        <li class=""><a href="../index.html">首页</a></li>
+                                        <li class=""><a href="https://github.com/hiloteam/Hilo">源码下载</a></li>
+                                        <li class=""><a href="../api/index.html">API文档</a></li>
+                                        <li class="active"><a href="index.html">教程文档</a></li>
+                                        <li class=""><a href="../examples/index.html">作品演示</a></li>
+                                    </ul>
+                    </div>
+    </div>
+</div>
+        <div class="main container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+
+                <li >
+            <a href="index.html">快速开始</a>
+                    </li>
+                    <li >
+            <a href="modular.html">模块化支持</a>
+                    </li>
+                    <li >
+            <a href="stage.html">从舞台开始</a>
+                    </li>
+                    <li class="active">
+            <a href="views.html">可视对象</a>
+                                    <li class="active">
+                                <ul class="nav">
+                                        <li><a href="#_2">继承结构</a></li>
+                                        <li><a href="#_3">显示结构</a></li>
+                                        <li><a href="#_4">渲染过程</a></li>
+                                    </ul>
+                            </li>
+                                </li>
+                    <li >
+            <a href="preload.html">预加载资源</a>
+                    </li>
+                    <li >
+            <a href="flappybird.html">使用Hilo快速开发Flappy Bird</a>
+                    </li>
+            </ul>
+</div></div>
+            <div class="col-md-9 content" role="main">
+                
+<h1 id="_1">可视对象</h1>
+<hr />
+<p>简单来说，所有可见的东西都是可视对象，它可以是图片、精灵、文字、图形，甚至DOM元素等等。一个游戏应用就是由各种各样的可视对象构成的。</p>
+<h2 id="_2">继承结构</h2>
+<p>Hilo采用面向对象的方式构建整个可视对象结构。下面是Hilo中可视对象的<strong>继承结构图</strong>：</p>
+<p><img alt="Inheritance hierarchy" src="images/inherit.svg" /></p>
+<p>从此图可以看到，View是可视对象基类，所有可视对象类都要继承此类。Container是容器类，可包含各种子对象，这两个类是最基本的类，其他的类都可由他们派生出来。</p>
+<p>当前，Hilo中提供的可视对象类有：</p>
+<ul>
+<li><code>View</code> - 可视对象基类。包含可视对象的基本属性和和方法。</li>
+<li><code>Container</code> - 容器类。可包含子对象，实现容器或组的功能。</li>
+<li><code>Stage</code> - 舞台类。它是一个特殊的容器，所有可视对象都必须添加到舞台才会显示出来。</li>
+<li><code>Bitmap</code> - 位图类。最简单的可视对象，只显示一个图片。</li>
+<li><code>Sprite</code> - 精灵类。多帧图片组成的动画序列。</li>
+<li><code>Graphics</code> - 绘图类。使用canvas绘图API绘制各种形状的类。</li>
+<li><code>DOMElement</code> - DOM元素类。可以像其他可视对象一样来控制和管理DOM元素。</li>
+<li><code>Text</code> - 简单文本类。简单的canvas文本显示类。</li>
+<li><code>Button</code> - 简单按钮类。实现简单图片按钮功能的类。</li>
+</ul>
+<h2 id="_3">显示结构</h2>
+<p>Hilo里的可视对象显示结构是一种典型的树形结构。下面是可视对象的<strong>显示结构图</strong>：</p>
+<p><img alt="Display hierarchy" src="images/display.svg" /></p>
+<p>从此图可以看到，Hilo里的显示结构与HTML DOM树的结构非常类似。其中，<code>View</code>相当于各种各样的<code>HTMLElement</code>；<code>Stage</code>相当于<code>body(HTMLBodyElement)</code>，是根节点和顶层容器；<code>Container</code>则相当于<code>div(HTMLDivElement)</code>，他可以包含作为叶子节点的<code>View</code>，也可以包含作为子容器的<code>Container</code>，而子容器<code>Container</code>又可以包含下一层的<code>View</code>和<code>Container</code>。这种灵活的显示结构可以形成非常复杂的显示结构，也方便对象管理。</p>
+<h2 id="_4">渲染过程</h2>
+<p>整个渲染过程开始于舞台，当调用舞台Stage的<code>tick</code>方法后，会遍历整个显示结构树，逐个调用可视对象的<code>render</code>方法，而具体的渲染实现则由相应的渲染器<code>Renderer</code>完成。计时器<code>Ticker</code>会按照设定的<code>fps</code>频率不断的重复调用此渲染过程。</p>
+<p><img alt="Render process" src="images/render.svg" /></p>
+<p>由于渲染器<code>Renderer</code>只会注入到舞台<code>Stage</code>，可视对象只需调用<code>Renderer</code>的统一接口，由此，可视对象就与渲染实现了基本的解耦，通过派生不同的<code>Renderer</code>可以轻松实现不同的渲染模式。</p>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'Hilo'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                        <p>© Hilo 2016</p>
+                    </footer>
+
+        
+        <script src="./../js/jquery.min.js"></script>
+        <script src="./../bootstrap3.0.3/js/bootstrap.min.js"></script>
+        <script src="./../js/prettify.min.js"></script>
+        <script src="./js/base.js"></script>
+            </body>
+</html>
