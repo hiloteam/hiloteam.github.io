@@ -9,7 +9,7 @@ copyright: © Hilo 2016
 topnav:
 - ['首页', '../index.html']
 - ['源码下载', 'https://github.com/hiloteam/Hilo']
-- ['API文档', '../api/index.html']
+- ['API文档', 'http://hiloteam.github.io/Hilo/docs/api/index.html']
 - ['教程文档', 'index.html', True]
 - ['作品演示', '../examples/index.html']
 
