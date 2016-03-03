@@ -11,7 +11,7 @@ Hilo是一个开放式的框架，提供多种模块化范式的版本供您使�
 * [For SeaJS(CMD) 版本](../download/hilo-cmd.zip)
 * [For Kissy 版本](../download/hilo-kissy.zip)
 
-此外，您也可以到GitLab上获取Hilo的最新源码：[https://github.com/hiloteam/Hilo](https://github.com/hiloteam/Hilo)
+此外，您也可以到Github上获取Hilo的最新源码：[https://github.com/hiloteam/Hilo](https://github.com/hiloteam/Hilo)
 
 然后把Hilo类库引入到页面中：
 
@@ -23,7 +23,8 @@ Hilo是一个开放式的框架，提供多种模块化范式的版本供您使�
 
 ```
 var stage = new Hilo.Stage({
-    canvas: canvas,
+    renderType:'canvas',
+    container: containerElem,
     width: 320,
     height: 480
 });
@@ -56,8 +57,8 @@ var bird = new Bitmap({
 要想舞台上的图形、精灵动画等对象能响应用户的点击、触碰等交互事件，就必需先为舞台开启DOM事件响应，然后就可以使用View.on()来响应事件。
 
 ```
-stage.enableDOMEvent('mousedown', true);
-sprite.on('mousedown', function(e){
+stage.enableDOMEvent(Hilo.event.POINTER_START, true);
+sprite.on(Hilo.event.POINTER_START, function(e){
     console.log(e.eventTarget, e.stageX, e.stageY);
 });
 ```

@@ -9,14 +9,16 @@
 
 舞台Stage的创建非常简单。它接受一个`properties`参数对象，包含3个基本属性：
 
-* `canvas` - 指定舞台所对应的DOM元素。它可以是一个canvas元素，也可以是一个普通的div元素。它决定了是使用canvas渲染所有对象还是使用DOM和CSS来渲染。
+* `container` - 指定舞台所对应容器，舞台会根据渲染模式不同创建不同的dom对象插入到容器中。
+* `renderType` - 指定舞台渲染模式。目前支持canvas，dom，webgl三种渲染模式，默认canvas。
 * `width` - 指定舞台的宽度。
 * `height` - 指定舞台的高度。
 
 ```
 var stage = new Hilo.Stage({
-    canvas: canvas, 
-    width: 480, 
+    renderType:'canvas',
+    container: container,
+    width: 480,
     height: 320
 });
 ```

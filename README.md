@@ -1,4 +1,4 @@
-Hilo.com
+[Hilo](http://hiloteam.github.io/)
 ==========
 
 Site of Hilo
