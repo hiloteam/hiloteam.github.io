@@ -47,7 +47,7 @@ ticker.start();
 舞台上的一切对象都是可视对象，可以是图片、精灵、文字、图形，甚至DOM元素等等。Hilo提供了一些基本的可视类供您使用，比如添加一个图片到舞台上：
 
 ```
-var bird = new Bitmap({
+var bird = new Hilo.Bitmap({
     image: 'images/bird.png'
 }).addTo(stage);
 ```

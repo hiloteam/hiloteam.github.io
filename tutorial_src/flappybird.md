@@ -34,7 +34,7 @@ load: function(){
         {id:'bird', src:'images/bird.png'},
         {id:'holdback', src:'images/holdback.png'}
     ];
- 
+
     this.queue = new Hilo.LoadQueue();
     this.queue.add(resources);
     this.queue.on('complete', this.onComplete.bind(this));
@@ -61,15 +61,15 @@ onComplete: function(e){
     this.birdAtlas = new Hilo.TextureAtlas({
         image: this.queue.get('bird').content,
         frames: [
-            [0, 120, 86, 60], 
-            [0, 60, 86, 60], 
+            [0, 120, 86, 60],
+            [0, 60, 86, 60],
             [0, 0, 86, 60]
         ],
         sprites: {
             bird: [0, 1, 2]
         }
     });
- 
+
     //删除下载队列的complete事件监听
     this.queue.off('complete');
     //发送complete事件
@@ -105,14 +105,14 @@ initStage: function(){
     this.width = 720;
     this.height = 1280;
     this.scale = 0.5;
- 
+
     var stage = this.stage = new Hilo.Stage({
         width: this.width,
         height: this.height,
         scaleX: scale,
         scaleY: scale
     });
- 
+
     document.body.appendChild(stage.canvas);
 }
 ```
@@ -176,7 +176,7 @@ initBackground: function(){
     this.ground.y = this.height - this.ground.height;
 
     //循环移动地面
-    Hilo.Tween.to(this.ground, {x:-60}, {time:300, loop:true});
+    Hilo.Tween.to(this.ground, {x:-60}, {duration:300, loop:true});
 }
 ```
 
@@ -205,26 +205,26 @@ var ReadyScene = Hilo.Class.create({
         ReadyScene.superclass.constructor.call(this, properties);
         this.init(properties);
     },
- 
+
     init: function(properties){
         //准备Get Ready!
         var getready = new Hilo.Bitmap({
             image: properties.image,
             rect: [0, 0, 508, 158]
         });
- 
+
         //开始提示tap
         var tap = new Hilo.Bitmap({
             image: properties.image,
             rect: [0, 158, 286, 246]
         });
- 
+
         //确定getready和tap的位置
         tap.x = this.width - tap.width >> 1;
         tap.y = this.height - tap.height + 40 >> 1;
         getready.x = this.width - getready.width >> 1;
         getready.y = tap.y - getready.height >> 0;
- 
+
         this.addChild(tap, getready);
     }
 });
@@ -251,7 +251,7 @@ var OverScene = ns.OverScene = Hilo.Class.create({
         OverScene.superclass.constructor.call(this, properties);
         this.init(properties);
     },
- 
+
     init: function(properties){
         //Game Over图片文字
         var gameover = this.gameover = new Hilo.Bitmap({
@@ -259,28 +259,28 @@ var OverScene = ns.OverScene = Hilo.Class.create({
             image: properties.image,
             rect: [0, 298, 508, 158]
         });
- 
+
         //结束面板
         var board = this.board = new Hilo.Bitmap({
             id: 'board',
             image: properties.image,
             rect: [0, 0, 590, 298]
         });
- 
+
         //开始按钮
         var startBtn = this.startBtn = new Hilo.Bitmap({
             id: 'start',
             image: properties.image,
             rect: [590, 0, 290, 176]
         });
- 
+
         //等级按钮
         var gradeBtn = this.gradeBtn = new Hilo.Bitmap({
             id: 'grade',
             image: properties.image,
             rect: [590, 176, 290, 176]
         });
- 
+
         //玩家当前分数
         var scoreLabel = this.scoreLabel = new Hilo.BitmapText({
             id: 'score',
@@ -290,7 +290,7 @@ var OverScene = ns.OverScene = Hilo.Class.create({
             letterSpacing: 4,
             text: 0
         });
- 
+
         //玩家最好成绩
         var bestLabel = this.bestLabel = new Hilo.BitmapText({
             id: 'best',
@@ -300,7 +300,7 @@ var OverScene = ns.OverScene = Hilo.Class.create({
             letterSpacing: 4,
             text: 0
         });
- 
+
         //白色的遮罩效果
         var whiteMask = this.whiteMask = new Hilo.View({
             id: 'mask',
@@ -308,7 +308,7 @@ var OverScene = ns.OverScene = Hilo.Class.create({
             height: this.height,
             alpha: 0
         }).setBgFill('#fff');
- 
+
         //设置各个元素的坐标位置
         board.x = this.width - board.width >> 1;
         board.y = this.height - board.height >> 1;
@@ -322,7 +322,7 @@ var OverScene = ns.OverScene = Hilo.Class.create({
         scoreLabel.y = board.y + 90;
         bestLabel.x = scoreLabel.x;
         bestLabel.y = scoreLabel.y + 105;
-        
+
         this.addChild(gameover, board, startBtn, gradeBtn, scoreLabel, bestLabel, whiteMask);
     }
 });
@@ -332,17 +332,17 @@ var OverScene = ns.OverScene = Hilo.Class.create({
 
 ```
 show: function(score, bestScore){
-    this.scoreLabel.text = score;
-    this.bestLabel.text = bestScore;
+    this.scoreLabel.setText(score);
+    this.bestLabel.setText(bestScore);
     this.whiteMask.alpha = 1.0;
- 
-    Hilo.Tween.from(this.gameover, {alpha:0}, {time:100});
-    Hilo.Tween.from(this.board, {alpha:0, y:this.board.y+150}, {time:200, delay:200});
-    Hilo.Tween.from(this.scoreLabel, {alpha:0, y:this.scoreLabel.y+150}, {time:200, delay:200});
-    Hilo.Tween.from(this.bestLabel, {alpha:0, y:this.bestLabel.y+150}, {time:200, delay:200});
-    Hilo.Tween.from(this.startBtn, {alpha:0}, {time:100, delay:600});
-    Hilo.Tween.from(this.gradeBtn, {alpha:0}, {time:100, delay:600});
-    Hilo.Tween.to(this.whiteMask, {alpha:0}, {time:400});
+
+    Hilo.Tween.from(this.gameover, {alpha:0}, {duration:100});
+    Hilo.Tween.from(this.board, {alpha:0, y:this.board.y+150}, {duration:200, delay:200});
+    Hilo.Tween.from(this.scoreLabel, {alpha:0, y:this.scoreLabel.y+150}, {duration:200, delay:200});
+    Hilo.Tween.from(this.bestLabel, {alpha:0, y:this.bestLabel.y+150}, {duration:200, delay:200});
+    Hilo.Tween.from(this.startBtn, {alpha:0}, {duration:100, delay:600});
+    Hilo.Tween.from(this.gradeBtn, {alpha:0}, {duration:100, delay:600});
+    Hilo.Tween.to(this.whiteMask, {alpha:0}, {duration:400});
 }
 ```
 
@@ -377,7 +377,7 @@ var Bird = ns.Bird = Hilo.Class.create({
     Extends: Hilo.Sprite,
     constructor: function(properties){
         Bird.superclass.constructor.call(this, properties);
-        
+
         //添加小鸟精灵动画帧
         this.addFrame(properties.atlas.getSprite('bird'));
         //设置小鸟扇动翅膀的频率
@@ -407,9 +407,9 @@ getReady: function(){
     this.interval = 6;
     //恢复小鸟精灵动画
     this.play();
- 
+
     //小鸟上下漂浮的动画
-    this.tween = Hilo.Tween.to(this, {y:this.y + 10, rotation:-8}, {time:400, reverse:true, loop:true});
+    this.tween = Hilo.Tween.to(this, {y:this.y + 10, rotation:-8}, {duration:400, reverse:true, loop:true});
 }
 ```
 
@@ -458,24 +458,24 @@ startFly: function(){
 ```
 onUpdate: function(){
     if(this.isDead) return;
- 
+
     //飞行时间
     var time = (+new Date()) - this.flyStartTime;
     //飞行距离
     var distance = this.initVelocity * time - 0.5 * this.gravity * time * time;
     //y轴坐标
     var y = this.flyStart - distance;
- 
+
     if(y <= this.groundY){
         //小鸟未落地
         this.y = y;
         if(distance > 0 && !this.isUp){
             //往上飞时，角度上仰20度
-            this.tween = Hilo.Tween.to(this, {rotation:-20}, {time:200});
+            this.tween = Hilo.Tween.to(this, {rotation:-20}, {duration:200});
             this.isUp = true;
         }else if(distance < 0 && this.isUp){
             //往下跌落时，角度往下90度
-            this.tween = Hilo.Tween.to(this, {rotation:90}, {time:this.groundY - this.y});
+            this.tween = Hilo.Tween.to(this, {rotation:90}, {duration:this.groundY - this.y});
             this.isUp = false;
         }
     }else{
@@ -516,7 +516,7 @@ this.numHoses = 4;
 this.numOffscreenHoses = this.numHoses * 0.5;
 //管子的宽度（包括管子之间的间隔）
 this.hoseWidth = 148 + this.hoseSpacingX;
- 
+
 //初始化障碍的宽和高
 this.width = this.hoseWidth * this.numHoses;
 this.height = properties.height;
@@ -532,13 +532,13 @@ createHoses: function(image){
             image: image,
             rect: [0, 0, 148, 820]
         }).addTo(this);
- 
+
         //上部分管子
         var upHose = new Hilo.Bitmap({
             image: image,
             rect: [148, 0, 148, 820]
         }).addTo(this);
- 
+
         this.placeHose(downHose, upHose, i);
     }
 }
@@ -569,7 +569,7 @@ placeHose: function(down, up, index){
     //随机位置
     down.y = downMinY + (downMaxY - downMinY) * Math.random() >> 0;
     down.x = this.hoseWidth * index;
- 
+
     //上部分管子位置
     up.y = down.y - this.hoseSpacingY - up.height;
     up.x = down.x;
@@ -589,7 +589,7 @@ resetHoses方法要实现的就是，每当有numOffscreenHoses数量的管子�
 ```
 resetHoses: function(){
     var total = this.numChildren;
- 
+
     //把已移出屏幕外的管子放到队列最后面，并重置它们的可穿越位置
     for(var i = 0; i < this.numOffscreenHoses; i++){
         var downHose = this.getChildAt(0);
@@ -598,19 +598,19 @@ resetHoses: function(){
         this.setChildIndex(upHose, total - 1);
         this.placeHose(downHose, upHose, this.numOffscreenHoses + i);
     }
-    
+
     //重新确定队列中所有管子的x轴坐标
     for(var i = 0; i < total - this.numOffscreenHoses * 2; i++){
         var hose = this.getChildAt(i);
         hose.x = this.hoseWidth * (i * 0.5 >> 0);
     }
- 
+
     //重新确定障碍的x轴坐标
     this.x = 0;
- 
+
     //更新穿过的管子数量
     this.passThrough += this.numOffscreenHoses;
- 
+
     //继续移动
     this.startMove();
 }
@@ -659,14 +659,14 @@ checkCollision: function(bird){
 ```
 calcPassThrough: function(x){
     var count = 0;
- 
+
     x = -this.x + x;
     if(x > 0){
         var num = x / this.hoseWidth + 0.5 >> 0;
         count += num;
     }
     count += this.passThrough;
- 
+
     return count;
 }
 ```
@@ -687,13 +687,13 @@ calcScore: function(){
 ```
 onUpdate: function(){
     if(this.state === 'ready') return;
- 
+
     if(this.bird.isDead){
         //如果小鸟死亡，则游戏结束
         this.gameOver();
     }else{
         //更新玩家得分
-        this.currentScore.text = this.calcScore();
+        this.currentScore.setText(this.calcScore());
         //碰撞检测
         if(this.holdbacks.checkCollision(this.bird)){
             this.gameOver();
@@ -712,7 +712,7 @@ gameReady: function(){
     //重置分数为0
     this.score = 0;
     this.currentScore.visible = true;
-    this.currentScore.text = this.score;
+    this.currentScore.setText(this.score);
     //显示准备场景
     this.gameReadyScene.visible = true;
     //重置障碍的位置
@@ -720,7 +720,7 @@ gameReady: function(){
     //准备小鸟
     this.bird.getReady();
 },
- 
+
 gameStart: function(){
     this.state = 'playing';
     //隐藏准备场景
@@ -728,7 +728,7 @@ gameStart: function(){
     //开始从右至左移动障碍
     this.holdbacks.startMove();
 },
- 
+
 gameOver: function(){
     if(this.state !== 'over'){
         //设置当前状态为结束over

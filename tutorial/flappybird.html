@@ -152,8 +152,8 @@
     this.birdAtlas = new Hilo.TextureAtlas({
         image: this.queue.get('bird').content,
         frames: [
-            [0, 120, 86, 60], 
-            [0, 60, 86, 60], 
+            [0, 120, 86, 60],
+            [0, 60, 86, 60],
             [0, 0, 86, 60]
         ],
         sprites: {
@@ -252,7 +252,7 @@ this.ticker.start();
     this.ground.y = this.height - this.ground.height;
 
     //循环移动地面
-    Hilo.Tween.to(this.ground, {x:-60}, {time:300, loop:true});
+    Hilo.Tween.to(this.ground, {x:-60}, {duration:300, loop:true});
 }
 </code></pre>
 
@@ -396,17 +396,17 @@ this.ticker.start();
 
 <p>结束场景显示的时候，不仅需要显示玩家的得分，出现的时候还是带动画效果显示出来的。这里，我们可以使用之前介绍过的Tween缓动变化类来实现这个过场动画。</p>
 <pre class="prettyprint well"><code>show: function(score, bestScore){
-    this.scoreLabel.text = score;
-    this.bestLabel.text = bestScore;
+    this.scoreLabel.setText(score);
+    this.bestLabel.setText(bestScore);
     this.whiteMask.alpha = 1.0;
 
-    Hilo.Tween.from(this.gameover, {alpha:0}, {time:100});
-    Hilo.Tween.from(this.board, {alpha:0, y:this.board.y+150}, {time:200, delay:200});
-    Hilo.Tween.from(this.scoreLabel, {alpha:0, y:this.scoreLabel.y+150}, {time:200, delay:200});
-    Hilo.Tween.from(this.bestLabel, {alpha:0, y:this.bestLabel.y+150}, {time:200, delay:200});
-    Hilo.Tween.from(this.startBtn, {alpha:0}, {time:100, delay:600});
-    Hilo.Tween.from(this.gradeBtn, {alpha:0}, {time:100, delay:600});
-    Hilo.Tween.to(this.whiteMask, {alpha:0}, {time:400});
+    Hilo.Tween.from(this.gameover, {alpha:0}, {duration:100});
+    Hilo.Tween.from(this.board, {alpha:0, y:this.board.y+150}, {duration:200, delay:200});
+    Hilo.Tween.from(this.scoreLabel, {alpha:0, y:this.scoreLabel.y+150}, {duration:200, delay:200});
+    Hilo.Tween.from(this.bestLabel, {alpha:0, y:this.bestLabel.y+150}, {duration:200, delay:200});
+    Hilo.Tween.from(this.startBtn, {alpha:0}, {duration:100, delay:600});
+    Hilo.Tween.from(this.gradeBtn, {alpha:0}, {duration:100, delay:600});
+    Hilo.Tween.to(this.whiteMask, {alpha:0}, {duration:400});
 }
 </code></pre>
 
@@ -463,7 +463,7 @@ this.ticker.start();
     this.play();
 
     //小鸟上下漂浮的动画
-    this.tween = Hilo.Tween.to(this, {y:this.y + 10, rotation:-8}, {time:400, reverse:true, loop:true});
+    this.tween = Hilo.Tween.to(this, {y:this.y + 10, rotation:-8}, {duration:400, reverse:true, loop:true});
 }
 </code></pre>
 
@@ -514,11 +514,11 @@ this.initVelocity = Math.sqrt(2 * this.flyHeight * this.gravity);
         this.y = y;
         if(distance &gt; 0 &amp;&amp; !this.isUp){
             //往上飞时，角度上仰20度
-            this.tween = Hilo.Tween.to(this, {rotation:-20}, {time:200});
+            this.tween = Hilo.Tween.to(this, {rotation:-20}, {duration:200});
             this.isUp = true;
         }else if(distance &lt; 0 &amp;&amp; this.isUp){
             //往下跌落时，角度往下90度
-            this.tween = Hilo.Tween.to(this, {rotation:90}, {time:this.groundY - this.y});
+            this.tween = Hilo.Tween.to(this, {rotation:90}, {duration:this.groundY - this.y});
             this.isUp = false;
         }
     }else{
@@ -703,7 +703,7 @@ this.height = properties.height;
         this.gameOver();
     }else{
         //更新玩家得分
-        this.currentScore.text = this.calcScore();
+        this.currentScore.setText(this.calcScore());
         //碰撞检测
         if(this.holdbacks.checkCollision(this.bird)){
             this.gameOver();
@@ -719,7 +719,7 @@ this.height = properties.height;
     //重置分数为0
     this.score = 0;
     this.currentScore.visible = true;
-    this.currentScore.text = this.score;
+    this.currentScore.setText(this.score);
     //显示准备场景
     this.gameReadyScene.visible = true;
     //重置障碍的位置
@@ -816,5 +816,5 @@ gameOver: function(){
         <script src="./../bootstrap3.0.3/js/bootstrap.min.js"></script>
         <script src="./../js/prettify.min.js"></script>
         <script src="./js/base.js"></script>
-            </body>
+        <script src="./res/flappybird/src/Asset.js"></script><script src="./res/flappybird/src/Bird.js"></script><script src="./res/flappybird/src/Holdbacks.js"></script><script src="./res/flappybird/src/OverScene.js"></script><script src="./res/flappybird/src/ReadyScene.js"></script><script src="./res/flappybird/src/game.js"></script><script src="./res/flappybird/src/hilo-standalone.js"></script>    </body>
 </html>
