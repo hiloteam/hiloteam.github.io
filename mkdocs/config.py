@@ -95,7 +95,8 @@ def validate_config(user_config):
             elif utils.is_css_file(filename):
                 extra_css.append(relpath)
             elif utils.is_javascript_file(filename):
-                extra_javascript.append(relpath)
+                if 'res/flappybird/src/' not in relpath:
+                    extra_javascript.append(relpath)
             else:
                 extra_others.append(relpath)
 
@@ -113,7 +114,7 @@ def validate_config(user_config):
     if config['theme_dir'] is None:
         package_dir = os.path.dirname(__file__)
         config['theme_dir'] = os.path.join(package_dir, 'themes', config['theme'])
-        
+
     if config['repo_url'] is not None and config['repo_name'] is None:
         repo_host = urlparse.urlparse(config['repo_url']).netloc.lower()
         if repo_host == 'github.com':
@@ -128,7 +129,7 @@ def validate_config(user_config):
 
     if config['include_nav'] is None:
         config['include_nav'] = len(config['pages']) > 1
-    
+
     # To Do:
 
     # The docs dir must exist.
