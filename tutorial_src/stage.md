@@ -23,6 +23,44 @@ var stage = new Hilo.Stage({
 });
 ```
 
+## 高清支持
+
+高清可以通过缩放stage来实现，width和height设置为二倍图大小，scale设置为0.5
+
+```
+var stage = new Hilo.Stage({
+    container:document.body,
+    width:750,
+    height:1334,
+    scaleX:0.5,
+    scaleY:0.5
+});
+```
+
+## 屏幕自适应
+
+屏幕自适应也可以通过缩放来实现，更新舞台宽高可以调用 ```stage.resize(width, height, true)```来更新
+```
+var gameWidth = 550;
+var gameHeight = 400;
+var stageScaleX = innerWidth/gameWidth;
+var stageScaleY = innerHeight/gameHeight;
+
+var stage = new Hilo.Stage({
+    container:document.body,
+    width:gameWidth,
+    height:gameHeight,
+    scaleX:stageScaleX,
+    scaleY:stageScaleY
+});
+
+window.onresize = function(){
+    stage.scaleX = innerWidth/gameWidth;
+    stage.scaleY = innerHeight/gameHeight;
+    stage.resize(gameWidth, gameHeight, true);
+};
+```
+
 ## 管理可视对象
 
 游戏画面一般由大量的图形、精灵动画等组成。舞台作为一个容器，它同样提供了方便的方法来管理这些可视对象。如添加、删除、排序等。

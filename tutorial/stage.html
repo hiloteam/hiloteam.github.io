@@ -69,8 +69,10 @@
                                     <li class="active">
                                 <ul class="nav">
                                         <li><a href="#_2">创建舞台</a></li>
-                                        <li><a href="#_3">管理可视对象</a></li>
-                                        <li><a href="#_4">舞台刷新和渲染</a></li>
+                                        <li><a href="#_3">高清支持</a></li>
+                                        <li><a href="#_4">屏幕自适应</a></li>
+                                        <li><a href="#_5">管理可视对象</a></li>
+                                        <li><a href="#_6">舞台刷新和渲染</a></li>
                                     </ul>
                             </li>
                                 </li>
@@ -108,7 +110,40 @@
 });
 </code></pre>
 
-<h2 id="_3">管理可视对象</h2>
+<h2 id="_3">高清支持</h2>
+<p>高清可以通过缩放stage来实现，width和height设置为二倍图大小，scale设置为0.5</p>
+<pre class="prettyprint well"><code>var stage = new Hilo.Stage({
+    container:document.body,
+    width:750,
+    height:1334,
+    scaleX:0.5,
+    scaleY:0.5
+});
+</code></pre>
+
+<h2 id="_4">屏幕自适应</h2>
+<p>屏幕自适应也可以通过缩放来实现，更新舞台宽高可以调用 <code>stage.resize(width, height, true)</code>来更新</p>
+<pre class="prettyprint well"><code>var gameWidth = 550;
+var gameHeight = 400;
+var stageScaleX = innerWidth/gameWidth;
+var stageScaleY = innerHeight/gameHeight;
+
+var stage = new Hilo.Stage({
+    container:document.body,
+    width:gameWidth,
+    height:gameHeight,
+    scaleX:stageScaleX,
+    scaleY:stageScaleY
+});
+
+window.onresize = function(){
+    stage.scaleX = innerWidth/gameWidth;
+    stage.scaleY = innerHeight/gameHeight;
+    stage.resize(gameWidth, gameHeight, true);
+};
+</code></pre>
+
+<h2 id="_5">管理可视对象</h2>
 <p>游戏画面一般由大量的图形、精灵动画等组成。舞台作为一个容器，它同样提供了方便的方法来管理这些可视对象。如添加、删除、排序等。</p>
 <ul>
 <li><code>addChild</code> - 添加子对象。</li>
@@ -117,7 +152,7 @@
 <li><code>sortChildren</code> - 对象所有子对象进行排序。</li>
 </ul>
 <p>更多的方法请参考API文档。</p>
-<h2 id="_4">舞台刷新和渲染</h2>
+<h2 id="_6">舞台刷新和渲染</h2>
 <p>舞台Stage上的物体的运动等一切变化，都是通过一个定时器Ticker不断地调用Stage.tick()方法来实现刷新和渲染的。</p>
 <pre class="prettyprint well"><code>var ticker = new Hilo.Ticker(60);
 ticker.addTick(stage);
