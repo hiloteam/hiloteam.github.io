@@ -5,11 +5,11 @@
 
 Hilo是一个开放式的框架，提供多种模块化范式的版本供您使用，您可以下载：
 
-* [Standalone 独立版本](https://github.com/hiloteam/Hilo/raw/v1.0.2/build/standalone/hilo-standalone.zip)
-* [For RequireJS(AMD) 版本](https://github.com/hiloteam/Hilo/raw/v1.0.2/build/amd/hilo-amd.zip)
-* [For CommonJS 版本](https://github.com/hiloteam/Hilo/raw/v1.0.2/build/commonjs/hilo-commonjs.zip)
-* [For SeaJS(CMD) 版本](https://github.com/hiloteam/Hilo/raw/v1.0.2/build/cmd/hilo-cmd.zip)
-* [For Kissy 版本](https://github.com/hiloteam/Hilo/raw/v1.0.2/build/kissy/hilo-kissy.zip)
+* [Standalone 独立版本](https://github.com/hiloteam/Hilo/raw/master/build/standalone/hilo-standalone.zip)
+* [For RequireJS(AMD) 版本](https://github.com/hiloteam/Hilo/raw/master/build/amd/hilo-amd.zip)
+* [For CommonJS 版本](https://github.com/hiloteam/Hilo/raw/master/build/commonjs/hilo-commonjs.zip)
+* [For SeaJS(CMD) 版本](https://github.com/hiloteam/Hilo/raw/master/build/cmd/hilo-cmd.zip)
+* [For Kissy 版本](https://github.com/hiloteam/Hilo/raw/master/build/kissy/hilo-kissy.zip)
 
 此外，您也可以到Github上获取Hilo的最新源码：[https://github.com/hiloteam/Hilo](https://github.com/hiloteam/Hilo)
 
