@@ -11,8 +11,8 @@ Site of Hilo
     * 编辑`tutorial.yml`文件`pages`块的内容，增加所写的教程文档。
 * 编译教程
     * 安装Python的包管理工具`pip`：
-        * curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-        * python get-pip.py
-    * 运行`pip install -r mkdocs/requirements.txt` 安装mkdocs依赖。
-    * 运行 `mkdocs/mkdocs build --config=tutorial.yml`。
+        * curl -O https://bootstrap.pypa.io/get-pip.py
+        * [sudo] python get-pip.py
+    * 运行`[sudo] pip install -r mkdocs/requirements.txt` 安装mkdocs依赖。
+    * 运行 `npm run build`。
     * 若编译正确，编译后的教程文档可在 `tutorial` 里找到。

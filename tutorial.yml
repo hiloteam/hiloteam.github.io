@@ -3,7 +3,7 @@ docs_dir: tutorial_src
 site_dir: tutorial
 theme_dir: tutorial_theme
 use_direcory_urls: False
-copyright: © Hilo 2016
+copyright: © 2016 Alibaba Group Holding Ltd.
 
 # 顶部导航
 topnav:
