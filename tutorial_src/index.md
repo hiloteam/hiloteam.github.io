@@ -58,7 +58,7 @@ var bird = new Hilo.Bitmap({
 
 ```
 stage.enableDOMEvent(Hilo.event.POINTER_START, true);
-sprite.on(Hilo.event.POINTER_START, function(e){
+stage.on(Hilo.event.POINTER_START, function(e){
     console.log(e.eventTarget, e.stageX, e.stageY);
 });
 ```
