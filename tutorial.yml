@@ -10,7 +10,7 @@ topnav:
 - ['首页', '../index.html']
 - ['源码下载', '//github.com/hiloteam/Hilo']
 - ['API文档', '//hiloteam.github.io/Hilo/docs/api-zh/index.html']
-- ['教程文档', 'index.html', True]
+- ['教程文档', './index.html', True]
 - ['作品演示', '../examples/index.html']
 
 # Markdown文档页面
