@@ -31,17 +31,21 @@ var game = window.game = {
     },
 
     initStage: function(){
-        this.width = 720;
-        this.height = 1280;
+        this.width = Math.min(innerWidth, 450) * 2;
+        this.height = Math.min(innerHeight, 750) * 2;
         this.scale = 0.5;
 
+        //舞台画布
+        var canvasType = location.search.indexOf('dom') != -1 ? 'dom' : 'canvas';
+
         //舞台
-        this.stage = new Hilo.Stage({
-            renderType:'canvas',
-            width: this.width,
-            height: this.height,
-            scaleX: this.scale,
-            scaleY: this.scale
+         this.stage = new Hilo.Stage({
+            renderType:canvasType,
+            canvas: canvas,
+             width: this.width,
+             height: this.height,
+             scaleX: this.scale,
+             scaleY: this.scale
         });
         document.body.appendChild(this.stage.canvas);
 
@@ -49,17 +53,23 @@ var game = window.game = {
         this.ticker = new Hilo.Ticker(60);
         this.ticker.addTick(Hilo.Tween);
         this.ticker.addTick(this.stage);
-        this.ticker.start();
+        this.ticker.start(true);
 
         //绑定交互事件
         this.stage.enableDOMEvent(Hilo.event.POINTER_START, true);
         this.stage.on(Hilo.event.POINTER_START, this.onUserInput.bind(this));
 
         //Space键控制
-        document.addEventListener('keydown', function(e){
-            if(e.keyCode === 32) this.onUserInput(e);
-        }.bind(this));
-
+        if(document.addEventListener){
+            document.addEventListener('keydown', function(e){
+                if(e.keyCode === 32) this.onUserInput(e);
+            }.bind(this));
+        }else{
+            document.attachEvent('onkeydown', function(e){
+                if(e.keyCode === 32) this.onUserInput(e);
+            }.bind(this));
+        }
+        
         //舞台更新
         this.stage.onUpdate = this.onUpdate.bind(this);
 
@@ -78,28 +88,29 @@ var game = window.game = {
         //背景
         var bgWidth = this.width * this.scale;
         var bgHeight = this.height * this.scale;
-        document.body.insertBefore(Hilo.createElement('div', {
+
+        var bgImg = this.asset.bg;
+        this.bg = new Hilo.Bitmap({
             id: 'bg',
-            style: {
-                background: 'url(images/bg.png) no-repeat',
-                backgroundSize: bgWidth + 'px, ' + bgHeight + 'px',
-                position: 'absolute',
-                width: bgWidth + 'px',
-                height: bgHeight + 'px'
-            }
-        }), this.stage.canvas);
+            image: bgImg,
+            scaleX:this.width / bgImg.width,
+            scaleY:this.height / bgImg.height
+        }).addTo(this.stage);
 
         //地面
+        var groundImg = this.asset.ground;
+        var groundOffset = 60;
         this.ground = new Hilo.Bitmap({
             id: 'ground',
-            image: this.asset.ground
+            image: groundImg,
+            scaleX:(this.width + groundOffset * 2) / groundImg.width
         }).addTo(this.stage);
 
         //设置地面的y轴坐标
         this.ground.y = this.height - this.ground.height;
-
+        
         //移动地面
-        Hilo.Tween.to(this.ground, {x:-60}, {duration:300, loop:true});
+        Hilo.Tween.to(this.ground, {x:-groundOffset * this.ground.scaleX}, {duration:400, loop:true});
     },
 
     initCurrentScore: function(){
@@ -107,7 +118,7 @@ var game = window.game = {
         this.currentScore = new Hilo.BitmapText({
             id: 'score',
             glyphs: this.asset.numberGlyphs,
-            text: 0
+            textAlign:'center'
         }).addTo(this.stage);
 
         //设置当前分数的位置
@@ -130,7 +141,7 @@ var game = window.game = {
             id: 'holdbacks',
             image: this.asset.holdback,
             height: this.height,
-            startX: this.width * 2,
+            startX: this.width + 200,
             groundY: this.ground.y
         }).addTo(this.stage, this.ground.depth - 1);
     },
@@ -138,6 +149,7 @@ var game = window.game = {
     initScenes: function(){
         //准备场景
         this.gameReadyScene = new game.ReadyScene({
+            id: 'readyScene',
             width: this.width,
             height: this.height,
             image: this.asset.ready
@@ -145,6 +157,7 @@ var game = window.game = {
 
         //结束场景
         this.gameOverScene = new game.OverScene({
+            id: 'overScene',
             width: this.width,
             height: this.height,
             image: this.asset.over,
@@ -154,14 +167,13 @@ var game = window.game = {
 
         //绑定开始按钮事件
         this.gameOverScene.getChildById('start').on(Hilo.event.POINTER_START, function(e){
-            e._stopped = true;
-            this.gameOverScene.visible = false;
+            e.stopImmediatePropagation && e.stopImmediatePropagation();
             this.gameReady();
         }.bind(this));
     },
 
     onUserInput: function(e){
-        if(this.state !== 'over'){
+        if(this.state !== 'over' && !this.gameOverScene.contains(e.eventTarget)){
             //启动游戏场景
             if(this.state !== 'playing') this.gameStart();
             //控制小鸟往上飞
@@ -186,6 +198,7 @@ var game = window.game = {
     },
 
     gameReady: function(){
+        this.gameOverScene.hide();
         this.state = 'ready';
         this.score = 0;
         this.currentScore.visible = true;
