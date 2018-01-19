@@ -5,7 +5,7 @@ var Bird = ns.Bird = Hilo.Class.create({
     Extends: Hilo.Sprite,
     constructor: function(properties){
         Bird.superclass.constructor.call(this, properties);
-
+        
         this.addFrame(properties.atlas.getSprite('bird'));
         this.interval = 6;
         this.pivotX = 43;
@@ -46,10 +46,10 @@ var Bird = ns.Bird = Hilo.Class.create({
         this.flyStartTime = +new Date();
         if(this.tween) this.tween.stop();
     },
-
+    
     onUpdate: function(){
         if(this.isDead) return;
-
+        
         //飞行时间
         var time = (+new Date()) - this.flyStartTime;
         //飞行距离

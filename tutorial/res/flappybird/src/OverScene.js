@@ -47,18 +47,17 @@ var OverScene = ns.OverScene = Hilo.Class.create({
             glyphs: properties.numberGlyphs,
             scaleX: 0.5,
             scaleY: 0.5,
-            letterSpacing: 4,
-            text: 0
+            letterSpacing: 4
         });
 
         var whiteMask = new Hilo.View({
             id: 'mask',
             width: this.width,
             height: this.height,
-            alpha: 0.0,
-            background:'#fff'
+            alpha: 0,
+            background: '#fff'
         });
-
+        
         board.x = this.width - board.width >> 1;
         board.y = this.height - board.height >> 1;
         gameover.x = this.width - gameover.width >> 1;
@@ -71,7 +70,7 @@ var OverScene = ns.OverScene = Hilo.Class.create({
         scoreLabel.y = board.y + 90;
         bestLabel.x = scoreLabel.x;
         bestLabel.y = scoreLabel.y + 105;
-
+        
         this.addChild(gameover, board, startBtn, gradeBtn, scoreLabel, bestLabel, whiteMask);
     },
 
@@ -79,15 +78,28 @@ var OverScene = ns.OverScene = Hilo.Class.create({
         this.visible = true;
         this.getChildById('score').setText(score);
         this.getChildById('best').setText(bestScore);
-        this.getChildById('mask').alpha = 1.0;
+        this.getChildById('mask').alpha = 1;
 
-        Hilo.Tween.from(this.getChildById('gameover'), {alpha:0}, {duration:100});
-        Hilo.Tween.from(this.getChildById('board'), {alpha:0, y:this.getChildById('board').y+150}, {duration:200, delay:200});
-        Hilo.Tween.from(this.getChildById('score'), {alpha:0, y:this.getChildById('score').y+150}, {duration:200, delay:200});
-        Hilo.Tween.from(this.getChildById('best'), {alpha:0, y:this.getChildById('best').y+150}, {duration:200, delay:200});
-        Hilo.Tween.from(this.getChildById('start'), {alpha:0}, {duration:100, delay:600});
-        Hilo.Tween.from(this.getChildById('grade'), {alpha:0}, {duration:100, delay:600});
+        Hilo.Tween.to(this.getChildById('gameover'), {alpha:1}, {duration:100});
+        Hilo.Tween.to(this.getChildById('board'), {alpha:1, y:this.getChildById('board').y-150}, {duration:200, delay:200});
+        Hilo.Tween.to(this.getChildById('score'), {alpha:1, y:this.getChildById('score').y-150}, {duration:200, delay:200});
+        Hilo.Tween.to(this.getChildById('best'), {alpha:1, y:this.getChildById('best').y-150}, {duration:200, delay:200});
+        Hilo.Tween.to(this.getChildById('start'), {alpha:1}, {duration:100, delay:600});
+        Hilo.Tween.to(this.getChildById('grade'), {alpha:1}, {duration:100, delay:600});
         Hilo.Tween.to(this.getChildById('mask'), {alpha:0}, {duration:400});
+    },
+
+    hide : function(){
+        this.visible = false;
+        this.getChildById('gameover').alpha = 0;
+        this.getChildById('board').alpha = 0;
+        this.getChildById('score').alpha = 0;
+        this.getChildById('best').alpha = 0;
+        this.getChildById('start').alpha = 0;
+        this.getChildById('grade').alpha = 0;
+        this.getChildById('board').y += 150;
+        this.getChildById('score').y += 150;
+        this.getChildById('best').y += 150;
     }
 });
 

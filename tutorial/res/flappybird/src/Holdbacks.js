@@ -5,11 +5,11 @@ var Holdbacks = ns.Holdbacks = Hilo.Class.create({
     Extends: Hilo.Container,
     constructor: function(properties){
         Holdbacks.superclass.constructor.call(this, properties);
-
+        
         //管子之间的水平间隔
         this.hoseSpacingX = 300;
         //上下管子之间的垂直间隔，即小鸟要穿越的空间大小
-        this.hoseSpacingY = 240;
+        this.hoseSpacingY = 290;
         //管子的总数（上下一对管子算一个）
         this.numHoses = 4;
         //移出屏幕左侧的管子数量，一般设置为管子总数的一半
@@ -46,13 +46,13 @@ var Holdbacks = ns.Holdbacks = Hilo.Class.create({
                 image: image,
                 rect: [0, 0, 148, 820],
                 boundsArea:[
-                    {x:8, y:0},
-                    {x:140, y:0},
-                    {x:140, y:60},
-                    {x:136, y:60},
-                    {x:136, y:820},
-                    {x:14, y:820},
-                    {x:14, y:60},
+                    {x:8, y:0}, 
+                    {x:140, y:0}, 
+                    {x:140, y:60}, 
+                    {x:136, y:60}, 
+                    {x:136, y:820}, 
+                    {x:14, y:820}, 
+                    {x:14, y:60}, 
                     {x:8, y:60}
                 ]
             }).addTo(this);
@@ -62,19 +62,19 @@ var Holdbacks = ns.Holdbacks = Hilo.Class.create({
                 image: image,
                 rect: [148, 0, 148, 820],
                 boundsArea:[
-                    {x:14, y:0},
-                    {x:140, y:0},
-                    {x:140, y:820-60},
+                    {x:14, y:0}, 
+                    {x:140, y:0}, 
+                    {x:140, y:820-60}, 
                     {x:144, y:820-60},
-                    {x:144, y:820},
-                    {x:8, y:820},
-                    {x:8, y:820-60},
+                    {x:144, y:820}, 
+                    {x:8, y:820}, 
+                    {x:8, y:820-60}, 
                     {x:14, y:820-60}
                 ]
             }).addTo(this);
 
             this.placeHose(downHose, upHose, i);
-        }
+        }           
     },
 
     placeHose: function(down, up, index){
@@ -101,7 +101,7 @@ var Holdbacks = ns.Holdbacks = Hilo.Class.create({
             this.setChildIndex(upHose, total - 1);
             this.placeHose(downHose, upHose, this.numOffscreenHoses + i);
         }
-
+        
         //重新确定队列中所有管子的x轴坐标
         for(var i = 0; i < total - this.numOffscreenHoses * 2; i++){
             var hose = this.getChildAt(i);
@@ -116,12 +116,12 @@ var Holdbacks = ns.Holdbacks = Hilo.Class.create({
 
         //继续移动
         this.startMove();
+        Hilo.Tween._tweens.push(this.moveTween);
     },
 
     startMove: function(){
         //设置缓动的x轴坐标
         var targetX = -this.hoseWidth * this.numOffscreenHoses;
-        Hilo.Tween._tweens.push(this.moveTween);
         //设置缓动时间
         this.moveTween.duration = (this.x - targetX) * 4;
         //设置缓动的变换属性，即x从当前坐标变换到targetX
@@ -160,7 +160,7 @@ var Holdbacks = ns.Holdbacks = Hilo.Class.create({
         this.x = this.startX;
         this.passThrough = 0;
     }
-
+    
 });
 
 })(window.game);
